@@ -15,6 +15,13 @@ const PORT = process.env.PORT || 3000
 app.use(cors())
 app.use(express.json())
 
+app.use((req, res, next) => {
+  const date = new Date();
+  console.log(`> {request} : ${req.method} ;  {path}: ${req.path} ;  {time}: ${date.toLocaleString()} ; {ip}: ${req.ip}`);
+  next()
+  return
+})
+
 app.get('/', (req, res) => {
   res.json({ success: true, message: 'Turno Vehicle Store API is running' })
 })
